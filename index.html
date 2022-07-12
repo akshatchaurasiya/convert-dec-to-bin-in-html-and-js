@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script>
+var number=prompt("enter any no");
+
+
+function convert (number) {
+  let num = number;
+  let binary = (num % 2).toString();
+  for (; num > 1; ) {
+    num = parseInt(num / 2);
+    binary =  (num % 2) + (binary);
+    // document.write(binary +"<br>");
+  }
+  document.write(binary +"<br>");
+}
+convert(number);
+</script>
+
+</body>
+</html>
