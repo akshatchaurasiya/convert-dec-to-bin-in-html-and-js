@@ -1,23 +1,94 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Decimal to Binary</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23020c02'/><text x='50' y='35' text-anchor='middle' font-family='monospace' font-size='16' font-weight='700' fill='%2322d3ee'>42</text><text x='50' y='52' text-anchor='middle' font-family='monospace' font-size='10' fill='%234ade80' opacity='0.7'>↓ .toString(2)</text><rect x='10' y='60' width='22' height='22' rx='4' fill='%2316a34a' stroke='%234ade80' stroke-width='1.5'/><text x='21' y='76' text-anchor='middle' font-family='monospace' font-size='14' font-weight='700' fill='white'>1</text><rect x='36' y='60' width='22' height='22' rx='4' fill='%231e293b' stroke='%23334155' stroke-width='1.5'/><text x='47' y='76' text-anchor='middle' font-family='monospace' font-size='14' font-weight='700' fill='%2364748b'>0</text><rect x='62' y='60' width='22' height='22' rx='4' fill='%2316a34a' stroke='%234ade80' stroke-width='1.5'/><text x='73' y='76' text-anchor='middle' font-family='monospace' font-size='14' font-weight='700' fill='white'>1</text></svg>">
+    
+    <style>
+      body{
+          font-family: Arial, sans-serif;
+          padding: 20px;
+      }
+      .bit-container{
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px;
+          margin-top: 20px;
+      }
+  
+      .bit-box{
+          width: 50px;
+          height: 50px;
+          border: 2px solid #333;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 22px;
+          font-weight: bold;
+          border-radius: 6px;
+          background: #f5f5f5;
+      }
+  
+      .one{
+          background: #4CAF50;
+          color: white;
+      }
+  
+      .zero{
+          background: #E0E0E0;
+          color: #333;
+      }
+  
+      button{
+          margin-top: 20px;
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <h2>Decimal to Binary Converter</h2>
+    
+    <script>
+      function newConvert(){
+        location.reload();
+      }
+      let number = prompt("Enter any decimal number");
+      number = parseInt(number);
 
-<script>
-var number=prompt("enter any no");
-
-
-function convert (number) {
-  let num = number;
-  let binary = (num % 2).toString();
-  for (; num > 1; ) {
-    num = parseInt(num / 2);
-    binary =  (num % 2) + (binary);
-    // document.write(binary +"<br>");
-  }
-  document.write(binary +"<br>");
-}
-convert(number);
-</script>
-
-</body>
+      function convertToBinary(number){
+        if(isNaN(number)){
+            document.body.innerHTML += "<h3>Invalid Input!</h3>";
+            return;
+        }
+  
+        let binary = number.toString(2);
+        document.body.innerHTML += `
+            <p><strong>Decimal:</strong> ${number}</p>
+            <p><strong>Binary:</strong> ${binary}</p>
+        `;
+  
+        const container = document.createElement("div");
+        container.className = "bit-container";
+    
+        for(let i = 0; i < binary.length; i++){
+            const box = document.createElement("div");
+            box.className = "bit-box";
+            if(binary[i] === "1"){
+                box.classList.add("one");
+            }else{
+                box.classList.add("zero");
+            }
+            box.textContent = binary[i];
+            container.appendChild(box);
+        }
+        document.body.appendChild(container);
+      }
+      convertToBinary(number);
+    </script>
+    <button onclick="newConvert()">New Convert</button>
+  </body>
 </html>
